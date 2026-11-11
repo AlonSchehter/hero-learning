@@ -93,7 +93,7 @@ window.HeroArt = (() => {
   const colors = ['#537e6c','#7771a7','#bf7351','#4f83a2','#bf8d38'];
   const colorNames = ['ירוק יער','סגול קסום','כתום אדמה','כחול שמיים','זהב'];
   const types = [...(window.HERO_CONFIG?.theme === 'pirate' ? ['captain','sailor','monkey'] : ['knight','sorcerer','fox']), 'steve','aang','totoro','pikachu','sonic'];
-  const labels = {knight:['אביר','אבירה'],sorcerer:['קוסם','קוסמת'],fox:['שועל','שועלה'],captain:['קפטן','קפטנית'],sailor:['מלח','מלחית'],monkey:['קוף','קופה'],steve:['סטיב','אלכס'],aang:['אנג','אנג'],totoro:['טוטורו','טוטורו'],pikachu:['פיקאצ׳ו','פיקאצ׳ו'],sonic:['סוניק','איימי רוז']};
+  const labels = {knight:['אביר','אבירה'],sorcerer:['קוסם','קוסמת'],fox:['שועל','שועלה'],captain:['קפטן','קפטנית'],sailor:['מלח','מלחית'],monkey:['קוף','קופה'],steve:['סטיב','אלכס'],aang:['אנג','קטרה'],totoro:['טוטורו','טוטורו'],pikachu:['פיקאצ׳ו','פיקאצ׳ו'],sonic:['סוניק','איימי רוז']};
   const label=(type,gender='boy')=>labels[type]?.[gender==='girl'?1:0] || '';
   const face = (x=100,y=85) => `<path d="M${x-17} ${y}v5m34-5v5" stroke="#35423a" stroke-width="5" stroke-linecap="round"/><path d="M${x-6} ${y+15}q6 6 12 0" stroke="#8d5240" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="${x-24}" cy="${y+10}" rx="7" ry="4" fill="#eaa88c"/><ellipse cx="${x+24}" cy="${y+10}" rx="7" ry="4" fill="#eaa88c"/>`;
   function avatar(type='knight',gender='boy',color=colors[0]){
@@ -155,6 +155,15 @@ window.HeroArt = (() => {
       <path d="M94 29h12v27h10l-16 19-16-19h10z" fill="#77abb3"/>${face(100,83)}
       <path d="M158 205 166 56" stroke="#866947" stroke-width="6" stroke-linecap="round"/><path d="m165 65-32-18 67 3z" fill="${color}" stroke="#6c7957" stroke-width="2"/>
       <path d="M28 121q-20-10-7-22 12-9 16 3m116 82q28 8 28-11" fill="none" stroke="#9cbdb3" stroke-width="3" stroke-linecap="round"/>`;
+    if(type==='aang'&&girl)drawing=`
+      <path d="M65 68q-13 57-1 113l28-21 28 22 27-24q3-50-12-90z" fill="#49372f"/>
+      <path d="M72 177 68 210h25l7-31 8 31h26l-7-33" fill="#405b72"/><path d="m68 202-4 17h31v-17m12 0v17h32l-7-17" fill="#665345"/><path d="M66 203h29m12 0h28" stroke="#eee6d3" stroke-width="6"/>
+      <path d="M72 115 54 185q46 22 92 0l-20-70z" fill="#548aaa" stroke="#345e79" stroke-width="2"/><path d="M96 122 84 198h30l-9-76z" fill="#dce9e5"/><path d="M66 183q34 17 68 0" stroke="#eee7d6" stroke-width="8" fill="none"/><path d="M69 148h61v10H69z" fill="${color}"/>
+      <path d="M70 128 47 158m83-30 23 23" stroke="#548aaa" stroke-width="20" stroke-linecap="round"/><circle cx="46" cy="159" r="9" fill="#bb8766"/><circle cx="154" cy="152" r="9" fill="#bb8766"/>
+      <ellipse cx="61" cy="81" rx="7" ry="11" fill="#bb8766"/><ellipse cx="139" cy="81" rx="7" ry="11" fill="#bb8766"/><path d="M62 64q0-35 38-35 38 0 38 35v26q-2 29-38 31-36-2-38-31z" fill="#c99573"/>
+      <path d="M59 74q-11-47 41-50 50 0 42 50l-14-12q-16-2-28-20-11 18-28 20z" fill="#49372f"/><path d="M72 56q-21 31-3 52m59-52q21 31 3 52" fill="none" stroke="#49372f" stroke-width="9" stroke-linecap="round"/><path d="m65 96 7 3m57 0 7-3" stroke="#76bad0" stroke-width="4"/>
+      ${face(100,84)}<path d="M82 115q18 12 36 0" stroke="#4a6f8d" stroke-width="6" fill="none"/><circle cx="100" cy="121" r="7" fill="#78c8df" stroke="#e2eff0" stroke-width="2"/><path d="m97 119 6 4" stroke="#e2eff0" stroke-width="2"/>
+      `;
     if(type==='totoro')drawing=`
       <path d="M65 70 64 22l18 12 5 32m29 0 6-32 17-12-2 50" fill="#8c9b90" stroke="#5f7266" stroke-width="3"/>
       <path d="M46 129q-20 13-20 42 8 9 24-1m103-41q21 13 21 42-8 9-25-1" fill="#7e9182"/>
