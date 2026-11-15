@@ -285,7 +285,7 @@ window.HeroStore = (() => {
   const number = value => {if(!Number.isSafeInteger(value)||value<0||value>1e9)fail();return value;};
   const date = value => {if(typeof value!=='string'||value.length>40||!Number.isFinite(Date.parse(value)))fail();return value;};
   const items = value => {if(!Array.isArray(value)||value.length>1000)fail();const ids=new Set();return value.map(item=>{if(!object(item))fail();const key=id(item.id);if(ids.has(key))fail();ids.add(key);return {id:key,name:text(item.name,60)};});};
-  function validateProfile(p){
+  function validateBaseProfile(p){
     if(!object(p)||!object(p.avatar)||!object(p.inventory)||!object(p.progress))fail();
     if(!['boy','girl'].includes(p.gender)||!TYPES.includes(p.avatar.type)||!COLORS.includes(p.avatar.color))fail();
     const progress={};
@@ -313,10 +313,43 @@ window.HeroStore = (() => {
     const equippedPet=p.equippedPet==null?null:id(p.equippedPet);if(equippedPet&&!p.inventory.pets.some(x=>x.id===equippedPet))fail();
     const testPoints={};if(p.testPoints!==undefined){if(!object(p.testPoints)||Object.keys(p.testPoints).length>100)fail();for(const [key,value] of Object.entries(p.testPoints))testPoints[id(key)]=number(value);}
     if(p.millionGranted!==undefined&&typeof p.millionGranted!=='boolean')fail();
-    const grantMillion=APP==='curiosity-kingdom'&&p.name.trim()==='אילון מאסק'&&!p.millionGranted;
-    return {millionGranted:p.millionGranted===true||grantMillion,testPoints,equippedPet,arabic,magicPower,id:id(p.id),name:text(p.name,24),gender:p.gender,avatar:{type:p.avatar.type,color:p.avatar.color},
-      inventory:{gold:grantMillion?1000000:number(p.inventory.gold),weapons:items(p.inventory.weapons),potions:items(p.inventory.potions),artifacts:items(p.inventory.artifacts),pets:items(p.inventory.pets)},
+    let rikiGrant=null;
+    if(p.rikiGrant!=null){const g=p.rikiGrant;if(!object(g)||!object(g.added))fail();const added={};for(const category of ['weapons','potions','artifacts','pets']){if(!Array.isArray(g.added[category])||g.added[category].length>1000)fail();added[category]=g.added[category].map(id);if(new Set(added[category]).size!==added[category].length)fail();}rikiGrant={added,equippedPet:g.equippedPet==null?null:id(g.equippedPet),swordUnequipped:g.swordUnequipped===true};}
+    return {...(rikiGrant?{rikiGrant}:{}),millionGranted:p.millionGranted===true,testPoints,equippedPet,arabic,magicPower,id:id(p.id),name:text(p.name,24),gender:p.gender,avatar:{type:p.avatar.type,color:p.avatar.color},
+      inventory:{gold:number(p.inventory.gold),weapons:items(p.inventory.weapons),potions:items(p.inventory.potions),artifacts:items(p.inventory.artifacts),pets:items(p.inventory.pets)},
       swordUnequipped:p.swordUnequipped===true,deleted: p.deleted === true,progress,createdAt:date(p.createdAt),updatedAt:date(p.updatedAt)};
+  }
+  // Registry of all currently available collectible items; no invented artifacts.
+  const rikiItems={weapons:[{id:'iron-sword',name:'חרב ברזל'},{id:'golden-sword',name:'חרב זהב'}],potions:[{id:'arabic-magic-power',name:'שיקוי כוח קסם'}],artifacts:[],pets:[{id:'pet-dog',name:'כלב'},{id:'pet-cat',name:'חתול'},{id:'pet-dragon',name:'דרקון'}]};
+  function applyRiki(p){
+    if(APP==='curiosity-kingdom'&&p.name.trim()==='ריקי לוי'){
+      const g=p.rikiGrant ||= {added:{weapons:[],potions:[],artifacts:[],pets:[]},equippedPet:p.equippedPet,swordUnequipped:p.swordUnequipped};
+      for(const [category,items] of Object.entries(rikiItems))for(const item of items)if(!p.inventory[category].some(x=>x.id===item.id)){p.inventory[category].push({...item});if(!g.added[category].includes(item.id))g.added[category].push(item.id);}
+    }else if(p.rikiGrant){
+      const g=p.rikiGrant;for(const category of Object.keys(rikiItems))p.inventory[category]=p.inventory[category].filter(x=>!g.added[category].includes(x.id));
+      if(g.added.pets.includes(p.equippedPet))p.equippedPet=p.inventory.pets.some(x=>x.id===g.equippedPet)?g.equippedPet:null;
+      if(g.added.weapons.length)p.swordUnequipped=g.swordUnequipped;
+      if(g.added.potions.includes('arabic-magic-power'))p.magicPower=null;
+      delete p.rikiGrant;
+    }
+    return p;
+  }
+  const millionaire=p=>APP==='curiosity-kingdom'&&['אילון מאסק','אלון מאסק'].includes(p.name.trim());
+  const alwaysSuccess=p=>APP==='curiosity-kingdom'&&p?.name?.trim()==='הצודקת';
+  const special=p=>millionaire(p)||alwaysSuccess(p);
+  function validateProfile(p){
+    const safe=applyRiki(validateBaseProfile(p));
+    let session=null;
+    if(p.specialSession!=null){
+      const x=p.specialSession;if(!object(x)||!object(x.baseline)||x.baseline.specialSession!=null||typeof x.millionUsed!=='boolean')fail();
+      const baseline=validateBaseProfile(x.baseline);if(baseline.id!==safe.id||baseline.createdAt!==safe.createdAt)fail();
+      session={baseline,millionUsed:x.millionUsed};
+    }
+    if(!special(safe))return applyRiki(session?{...session.baseline,name:safe.name,deleted:safe.deleted,updatedAt:safe.updatedAt}:safe);
+    // One baseline for the whole special-name session, including switches between eggs.
+    session ||= {baseline:clone(safe),millionUsed:safe.millionGranted};
+    if(millionaire(safe)&&!session.millionUsed){safe.inventory.gold=1000000;safe.millionGranted=true;session.millionUsed=true;}
+    return {...safe,specialSession:session};
   }
   function validate(data){
     if(!object(data)||data.app!==APP||data.version!==1||!Array.isArray(data.profiles)||data.profiles.length>100)fail();
@@ -346,6 +379,9 @@ window.HeroStore = (() => {
     const data=read(),index=data.profiles.findIndex(p=>p.id===profileId);
     if(index<0)throw new Error('הפרופיל לא נמצא.');
     const original=data.profiles[index],candidate=clone(original);updater(candidate);
+    if(original.rikiGrant)candidate.rikiGrant=clone(original.rikiGrant);
+    if(original.specialSession)candidate.specialSession=clone(original.specialSession);
+    else if(special(candidate))candidate.specialSession={baseline:applyRiki({...clone(original),name:candidate.name}),millionUsed:false};
     candidate.id=original.id;candidate.createdAt=original.createdAt;candidate.updatedAt=new Date().toISOString();
     data.profiles[index]=validateProfile(candidate);write(data);return clone(data.profiles[index]);
   }
@@ -362,7 +398,7 @@ window.HeroStore = (() => {
   function trash(profileId){const d=read(),p=d.profiles.find(p=>p.id===profileId);if(!p)throw Error("הפרופיל לא נמצא");p.deleted=true;if(d.activeProfileId===profileId)d.activeProfileId=d.profiles.find(p=>!p.deleted)?.id||null;return write(d);}
   function restore(profileId){const d=read(),p=d.profiles.find(p=>p.id===profileId);if(!p)throw Error("הפרופיל לא נמצא");p.deleted=false;d.activeProfileId=p.id;return write(d);}
   function emptyTrash(){const d=read();d.profiles=d.profiles.filter(p=>!p.deleted);if(!d.profiles.some(p=>p.id===d.activeProfileId))d.activeProfileId=d.profiles[0]?.id||null;return write(d);}
-  return {trash,restore,emptyTrash,KEY,APP,MAX_BYTES,empty,read,validate,createProfile,updateProfile,select,parseBackup,mergeBackup,
+  return {alwaysSuccess,trash,restore,emptyTrash,KEY,APP,MAX_BYTES,empty,read,validate,createProfile,updateProfile,select,parseBackup,mergeBackup,
     exportBackup:()=>JSON.stringify({...read(),exportedAt:new Date().toISOString()},null,2)};
 })();
 

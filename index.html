@@ -25,6 +25,10 @@
 .collection-list button{background:#ebedde;padding:12px;border-radius:9px;border:1px solid #c5cfbf;cursor:pointer}.collection-list button[aria-pressed="true"]{background:#e5dbb5;border-color:#ae8b47}
 
 .collection-list{justify-content:center}.collection-list .weapon-tile{position:relative;display:grid;place-items:center;width:112px;height:170px;padding:12px;background:#f4f3e8;border-radius:14px}.collection-list .weapon-tile svg{display:block;position:static;width:70px;height:140px;filter:drop-shadow(0 4px 3px #384d3926)}.collection-list .weapon-tile[aria-pressed="true"]{background:#f4e9c6;border:2px solid #a78a45}.collection-list .weapon-equipped{position:absolute;top:5px;right:6px;border-radius:50%;padding:2px 6px;color:#fff;background:#527a60;font-size:14px}
+
+/* Name easter egg: shared across dashboard, dialogs and journeys. */
+html.laser-cursor,html.laser-cursor *{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%228%22%20fill%3D%22%23ff2020%22%20opacity%3D%22.12%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%225%22%20fill%3D%22%23ff2020%22%20opacity%3D%22.3%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23ff1717%22%2F%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2215%22%20r%3D%221.3%22%20fill%3D%22%23fff5ed%22%2F%3E%3C%2Fsvg%3E") 16 16, crosshair!important}
+html.laser-cursor :is(button,a,[role="button"],select,summary):not(:disabled):hover{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210%22%20fill%3D%22%23ff2020%22%20opacity%3D%22.12%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%227%22%20fill%3D%22%23ff2020%22%20opacity%3D%22.3%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%225%22%20fill%3D%22%23ff1717%22%2F%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2215%22%20r%3D%221.3%22%20fill%3D%22%23fff5ed%22%2F%3E%3C%2Fsvg%3E") 16 16, crosshair!important}
 </style>
   <style>.pet-store-button{padding:9px 20px;border:1px solid #b8a66e;border-radius:10px;background:#f1e5ba;color:#294d43;font-weight:bold;cursor:pointer}.pet-store-button:disabled{opacity:.5;cursor:default}.pet-shop-dialog{width:min(680px,94vw);border:1px solid #b8c5ac;border-radius:20px;background:#fbf8ed;color:#294d43;padding:22px;max-height:90dvh;overflow:auto}.pet-shop-dialog::backdrop{background:#172e39a0}.pet-shop-dialog header{display:flex;gap:18px;align-items:center;margin-bottom:18px}.pet-shop-dialog h2{font-size:22px;margin:0}.pet-shop-dialog header span{margin-right:auto;font-size:14px;color:#92712e}.pet-shop-dialog header button{flex-shrink:0}#pet-shop-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.pet-card{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 10px;border:2px solid #d5dcc8;border-radius:16px;background:#f0f2e3;color:#294d43;cursor:pointer}.pet-card svg{width:100%;height:115px}.pet-card strong{font-size:20px}.pet-card span{font-size:14px}.pet-card:hover:not(:disabled){border-color:#8ba786;background:#e5edda}.pet-card[aria-pressed=true]{border-color:#588270;box-shadow:0 0 0 2px #58827025}.pet-card:disabled{opacity:.65;cursor:default}.pet-none{grid-column:1/-1;justify-self:start;background:none;border:1px solid #b6c2aa;color:#456957;border-radius:10px;padding:9px 15px;cursor:pointer}.pet-none[aria-pressed=true]{background:#dce8d4}#pet-shop-error{color:#994c3c;font-size:13px;min-height:18px;margin:12px 0 0}.hero-companion{pointer-events:none}@media(max-width:500px){.pet-shop-dialog{padding:14px}.pet-shop-dialog header{gap:8px}.pet-shop-dialog h2{font-size:18px}#pet-shop-cards{gap:6px}.pet-card{padding:12px 5px;gap:8px}.pet-card svg{height:82px}.pet-card strong{font-size:16px}.pet-card span{font-size:12px}.pet-store-button{padding:8px 14px}}
 
@@ -107,6 +111,7 @@
 
 .a-officer-copy{width:100%}.a-warrior .d-officer-name{margin:2px 0 13px;text-align:center;display:block}.a-warrior .d-officer-name strong{display:block;font-size:19px}.a-warrior .d-officer-name span{display:block;font-size:10px;font-weight:normal;color:#89927d;margin-top:4px}.a-warrior .d-speech{position:relative;padding:16px 14px 14px;background:#fffdf2;border:1px solid #dedfcd;border-radius:12px;width:100%}.a-warrior .d-speech p{font-size:14px;line-height:1.75;margin:0}.a-warrior .d-speech:before{display:block;content:'';position:absolute;top:-6px;right:calc(50% - 6px);width:10px;height:10px;background:#fffdf2;border-top:1px solid #dedfcd;border-left:1px solid #dedfcd;transform:rotate(45deg)}.a-warrior .d-quote{display:block;position:absolute;left:8px;top:-3px;font-size:27px;color:#e2d6b9}.a-warrior{background:#eeeddf}@media(max-width:650px){.a-warrior .d-officer-name{margin:0 0 4px;text-align:right}.a-warrior .d-officer-name strong{font-size:13px}.a-warrior .d-officer-name span{display:none}.a-warrior .d-speech{padding:7px 10px}.a-warrior .d-speech p{font-size:11px;line-height:1.45}.a-warrior .d-quote{font-size:19px;left:4px}.a-warrior-art{height:108px}}
 </style>
+  
   
   
   
@@ -374,7 +379,7 @@ window.HeroStore = (() => {
   const number = value => {if(!Number.isSafeInteger(value)||value<0||value>1e9)fail();return value;};
   const date = value => {if(typeof value!=='string'||value.length>40||!Number.isFinite(Date.parse(value)))fail();return value;};
   const items = value => {if(!Array.isArray(value)||value.length>1000)fail();const ids=new Set();return value.map(item=>{if(!object(item))fail();const key=id(item.id);if(ids.has(key))fail();ids.add(key);return {id:key,name:text(item.name,60)};});};
-  function validateProfile(p){
+  function validateBaseProfile(p){
     if(!object(p)||!object(p.avatar)||!object(p.inventory)||!object(p.progress))fail();
     if(!['boy','girl'].includes(p.gender)||!TYPES.includes(p.avatar.type)||!COLORS.includes(p.avatar.color))fail();
     const progress={};
@@ -423,10 +428,43 @@ window.HeroStore = (() => {
     const equippedPet=p.equippedPet==null?null:id(p.equippedPet);if(equippedPet&&!p.inventory.pets.some(x=>x.id===equippedPet))fail();
     const testPoints={};if(p.testPoints!==undefined){if(!object(p.testPoints)||Object.keys(p.testPoints).length>100)fail();for(const [key,value] of Object.entries(p.testPoints))testPoints[id(key)]=number(value);}
     if(p.millionGranted!==undefined&&typeof p.millionGranted!=='boolean')fail();
-    const grantMillion=APP==='curiosity-kingdom'&&p.name.trim()==='אילון מאסק'&&!p.millionGranted;
-    return {millionGranted:p.millionGranted===true||grantMillion,testPoints,equippedPet,arabic,magicPower,id:id(p.id),name:text(p.name,24),gender:p.gender,avatar:{type:p.avatar.type,color:p.avatar.color},dictation,
-      inventory:{gold:grantMillion?1000000:number(p.inventory.gold),weapons:items(p.inventory.weapons),potions:items(p.inventory.potions),artifacts:items(p.inventory.artifacts),pets:items(p.inventory.pets)},
+    let rikiGrant=null;
+    if(p.rikiGrant!=null){const g=p.rikiGrant;if(!object(g)||!object(g.added))fail();const added={};for(const category of ['weapons','potions','artifacts','pets']){if(!Array.isArray(g.added[category])||g.added[category].length>1000)fail();added[category]=g.added[category].map(id);if(new Set(added[category]).size!==added[category].length)fail();}rikiGrant={added,equippedPet:g.equippedPet==null?null:id(g.equippedPet),swordUnequipped:g.swordUnequipped===true};}
+    return {...(rikiGrant?{rikiGrant}:{}),millionGranted:p.millionGranted===true,testPoints,equippedPet,arabic,magicPower,id:id(p.id),name:text(p.name,24),gender:p.gender,avatar:{type:p.avatar.type,color:p.avatar.color},dictation,
+      inventory:{gold:number(p.inventory.gold),weapons:items(p.inventory.weapons),potions:items(p.inventory.potions),artifacts:items(p.inventory.artifacts),pets:items(p.inventory.pets)},
       swordUnequipped:p.swordUnequipped===true,deleted: p.deleted === true,progress,createdAt:date(p.createdAt),updatedAt:date(p.updatedAt)};
+  }
+  // Registry of all currently available collectible items; no invented artifacts.
+  const rikiItems={weapons:[{id:'iron-sword',name:'חרב ברזל'},{id:'golden-sword',name:'חרב זהב'}],potions:[{id:'arabic-magic-power',name:'שיקוי כוח קסם'}],artifacts:[],pets:[{id:'pet-dog',name:'כלב'},{id:'pet-cat',name:'חתול'},{id:'pet-dragon',name:'דרקון'}]};
+  function applyRiki(p){
+    if(APP==='curiosity-kingdom'&&p.name.trim()==='ריקי לוי'){
+      const g=p.rikiGrant ||= {added:{weapons:[],potions:[],artifacts:[],pets:[]},equippedPet:p.equippedPet,swordUnequipped:p.swordUnequipped};
+      for(const [category,items] of Object.entries(rikiItems))for(const item of items)if(!p.inventory[category].some(x=>x.id===item.id)){p.inventory[category].push({...item});if(!g.added[category].includes(item.id))g.added[category].push(item.id);}
+    }else if(p.rikiGrant){
+      const g=p.rikiGrant;for(const category of Object.keys(rikiItems))p.inventory[category]=p.inventory[category].filter(x=>!g.added[category].includes(x.id));
+      if(g.added.pets.includes(p.equippedPet))p.equippedPet=p.inventory.pets.some(x=>x.id===g.equippedPet)?g.equippedPet:null;
+      if(g.added.weapons.length)p.swordUnequipped=g.swordUnequipped;
+      if(g.added.potions.includes('arabic-magic-power'))p.magicPower=null;
+      delete p.rikiGrant;
+    }
+    return p;
+  }
+  const millionaire=p=>APP==='curiosity-kingdom'&&['אילון מאסק','אלון מאסק'].includes(p.name.trim());
+  const alwaysSuccess=p=>APP==='curiosity-kingdom'&&p?.name?.trim()==='הצודקת';
+  const special=p=>millionaire(p)||alwaysSuccess(p);
+  function validateProfile(p){
+    const safe=applyRiki(validateBaseProfile(p));
+    let session=null;
+    if(p.specialSession!=null){
+      const x=p.specialSession;if(!object(x)||!object(x.baseline)||x.baseline.specialSession!=null||typeof x.millionUsed!=='boolean')fail();
+      const baseline=validateBaseProfile(x.baseline);if(baseline.id!==safe.id||baseline.createdAt!==safe.createdAt)fail();
+      session={baseline,millionUsed:x.millionUsed};
+    }
+    if(!special(safe))return applyRiki(session?{...session.baseline,name:safe.name,deleted:safe.deleted,updatedAt:safe.updatedAt}:safe);
+    // One baseline for the whole special-name session, including switches between eggs.
+    session ||= {baseline:clone(safe),millionUsed:safe.millionGranted};
+    if(millionaire(safe)&&!session.millionUsed){safe.inventory.gold=1000000;safe.millionGranted=true;session.millionUsed=true;}
+    return {...safe,specialSession:session};
   }
   function validate(data){
     if(!object(data)||data.app!==APP||data.version!==1||!Array.isArray(data.profiles)||data.profiles.length>100)fail();
@@ -456,6 +494,9 @@ window.HeroStore = (() => {
     const data=read(),index=data.profiles.findIndex(p=>p.id===profileId);
     if(index<0)throw new Error('הפרופיל לא נמצא.');
     const original=data.profiles[index],candidate=clone(original);updater(candidate);
+    if(original.rikiGrant)candidate.rikiGrant=clone(original.rikiGrant);
+    if(original.specialSession)candidate.specialSession=clone(original.specialSession);
+    else if(special(candidate))candidate.specialSession={baseline:applyRiki({...clone(original),name:candidate.name}),millionUsed:false};
     candidate.id=original.id;candidate.createdAt=original.createdAt;candidate.updatedAt=new Date().toISOString();
     data.profiles[index]=validateProfile(candidate);write(data);return clone(data.profiles[index]);
   }
@@ -472,7 +513,7 @@ window.HeroStore = (() => {
   function trash(profileId){const d=read(),p=d.profiles.find(p=>p.id===profileId);if(!p)throw Error("הפרופיל לא נמצא");p.deleted=true;if(d.activeProfileId===profileId)d.activeProfileId=d.profiles.find(p=>!p.deleted)?.id||null;return write(d);}
   function restore(profileId){const d=read(),p=d.profiles.find(p=>p.id===profileId);if(!p)throw Error("הפרופיל לא נמצא");p.deleted=false;d.activeProfileId=p.id;return write(d);}
   function emptyTrash(){const d=read();d.profiles=d.profiles.filter(p=>!p.deleted);if(!d.profiles.some(p=>p.id===d.activeProfileId))d.activeProfileId=d.profiles[0]?.id||null;return write(d);}
-  return {trash,restore,emptyTrash,KEY,APP,MAX_BYTES,empty,read,validate,createProfile,updateProfile,select,parseBackup,mergeBackup,
+  return {alwaysSuccess,trash,restore,emptyTrash,KEY,APP,MAX_BYTES,empty,read,validate,createProfile,updateProfile,select,parseBackup,mergeBackup,
     exportBackup:()=>JSON.stringify({...read(),exportedAt:new Date().toISOString()},null,2)};
 })();
 
@@ -762,12 +803,12 @@ window.ArabicModel=(()=>{
     accepted.push((father?'שם אבי ':'שם אמי ')+name,(father?'השם של אבא שלי ':'השם של אמא שלי ')+name,(father?'השם של אבא שלי הוא ':'השם של אמא שלי הוא ')+name);
    }
    const normalizeAnswer=text=>q.mode==='numbers'?normalize(text).replace(/[׳’]/g,"'").replace(/ח'מס/g,'חמס').replace(/תלאת'ה/g,'תלאתה').replace(/תלאת'ין/g,'תלאתין').replace(/תלא?ת'עש/g,'תלתעש'):normalize(text);
-   correct=accepted.some(text=>normalizeAnswer(answer)===normalizeAnswer(text));
+   correct=HeroStore.alwaysSuccess(p)||accepted.some(text=>normalizeAnswer(answer)===normalizeAnswer(text));
    const record=d.records[q.mode+'_'+q.id] ||= {attempts:0,correct:0,rewarded:0};record.attempts++;
    if(correct){record.correct++;if(!r.name.startsWith('HELP:')){award=q.mode==='numbers'?2:record.rewarded<3?10:1;record.rewarded++;}r.last=r.current;r.current=null;r.missed=false;}
    else r.missed=true;
    const due=Math.floor(total(p)/100);coins=Math.max(0,due-d.coinsAwarded);d.coinsAwarded+=coins;p.inventory.gold+=coins;
-   if(complete(p)&&!d.potionAwarded){d.potionAwarded=true;potion=true;p.inventory.potions.push({id:POTION,name:'שיקוי כוח קסם'});}
+   if(complete(p)&&!d.potionAwarded){d.potionAwarded=true;potion=true;if(!p.inventory.potions.some(x=>x.id===POTION))p.inventory.potions.push({id:POTION,name:'שיקוי כוח קסם'});}
    p.progress[C.id]={status:complete(p)?'completed':'started',completedActivities:Object.values(d.records).reduce((sum,r)=>sum+r.correct,0),updatedAt:new Date().toISOString()};
    if(p.magicPower?.journey===C.id&&total(p)>=(p.magicPower.targetPoints||200))p.magicPower=null;
   });return {correct,award,coins,potion,profile};
@@ -815,7 +856,7 @@ window.ArabicArt=(()=>{
     button.onclick=()=>{try{store.select(p.id);}catch(e){status(e.message);toast(e.message);}};return button;
   }
   function render(){
-    const p=current();$('profiles').replaceChildren(...data.profiles.filter(p=>!p.deleted).map(profileButton));$('profile-count').textContent=data.profiles.filter(p=>!p.deleted).length;
+    const p=current();document.documentElement.classList.toggle('laser-cursor',['חתול','חתלתול'].includes(p?.name?.trim()));$('profiles').replaceChildren(...data.profiles.filter(p=>!p.deleted).map(profileButton));$('profile-count').textContent=data.profiles.filter(p=>!p.deleted).length;
     $('greeting').textContent=p?`שלום, ${p.name}`:'בחירת דמות';
     $('main-avatar').innerHTML=p?HeroAvatar.portrait(p):art.avatar(art.types[2],'boy',art.colors[0]);
     $('hero-name').textContent=p?p.name:'הגיבור או הגיבורה שלך';$('hero-class').textContent=p?HeroAvatar.label(p):'איזו דמות תצטרף למסע?';
@@ -1091,8 +1132,9 @@ window.DictationModel=(()=>{
   }
   function submit(profileId,list,word,answer,assisted=false){
     const canonical=list.words.find(w=>w.id===word.id);if(!canonical)throw Error('המילה אינה ברשימה.');
-    const correct=normalize(answer)===normalize(canonical.text);let award=0,coins=0;
+    let correct=false,award=0,coins=0;
     const profile=HeroStore.updateProfile(profileId,p=>{
+      correct=HeroStore.alwaysSuccess(p)||normalize(answer)===normalize(canonical.text);
       const data=lesson(p,list),round=data.round;
       if(!round||round.current!==word.id)throw Error('המילה השתנתה. יש לפתוח את האימון מחדש.');
       const r=data.words[word.id] ||= {correct:0,attempts:0,rewarded:0};r.rewarded??=r.correct;
@@ -1209,7 +1251,7 @@ window.DictationArt=(()=>{
   $('start').onclick=()=>{if(!profile){location.hash='';setTimeout(()=>document.getElementById('add-profile').click(),0);return;}$('preview-list').hidden=true;$('preview-words').setAttribute('aria-expanded','false');started=true;$('intro').hidden=true;$('exercise').hidden=false;newWord();};
   $('listen').onclick=playWord;$('parent-ready').onclick=()=>{$('parent').open=false;allowAnswer();};
   $('form').onsubmit=e=>{
-    e.preventDefault();if(locked||!heard||animating||!word)return;const answer=$('answer').value;if(!answer.trim()){$('answer').focus();return;}
+    e.preventDefault();if(locked||!heard||animating||!word)return;const answer=$('answer').value;if(!answer.trim()&&!HeroStore.alwaysSuccess(profile)){$('answer').focus();return;}
     locked=true;stopAudio();$('check').disabled=true;$('listen').disabled=true;$('answer').readOnly=true;$('error').textContent='';
     let result;try{result=model.submit(learnerId,list,word,answer,helpUsed||$('word-list').open);profile=result.profile;}catch(error){locked=false;$('check').disabled=false;$('listen').disabled=false;$('answer').readOnly=false;$('error').textContent=error.message;$('save-status').textContent='לא נשמר — אפשר לנסות שוב';return;}
     $('save-status').textContent='נשמר במכשיר זה';setTimeout(()=>$('save-status').textContent='',2500);tallies();animating=true;feedbackSound(result.correct);
@@ -1223,6 +1265,7 @@ window.DictationArt=(()=>{
   $('summary').onclick=()=>{try{refresh();}catch(e){$('error').textContent=e.message;return;}stopAudio();const content=$('summary-content');content.replaceChildren();const summary=model.stats(profile,list);list.words.forEach(w=>{const r=summary.words[w.id]||{correct:0,attempts:0};const row=document.createElement('div');row.className='d-summary-row';const title=document.createElement('strong');title.textContent=w.text;const val=document.createElement('span');val.textContent=`${r.correct} הצלחות`;row.append(title,val);content.append(row);});$('summary-dialog').showModal();};
   $('close-summary').onclick=()=>$('summary-dialog').close();
   window.addEventListener('hashchange',route);window.addEventListener('pagehide',stopAudio);
+  window.addEventListener('hero-extra-points',()=>{if(!screen.hidden){refresh();tallies();}});
   window.addEventListener('storage',e=>{if(!screen.hidden&&(e.key===HeroStore.KEY||e.key===null)){try{refresh();tallies();}catch(error){stopAudio();locked=true;$('check').disabled=true;$('error').textContent=error.message;}}});
   if(synth)synth.addEventListener('voiceschanged',()=>{if(voice()&&!screen.hidden){$('audio-warning').hidden=true;$('listen-label').textContent='להשמעת המילה';}});
   route();
@@ -1233,7 +1276,7 @@ window.DictationArt=(()=>{
 (()=>{
  const list=window.DICTATION_LIST,normalize=DictationModel.normalize;
  const feedback=grade=>grade===100?'מושלם! כל 20 המילים נכתבו נכון — והטרול נסוג! אני גאה בך!':grade>=90?'איזה קרב נהדר! הטרול נסוג! עוד קצת תרגול והמילים יהיו מדויקות כולן.':grade>=80?'כמעט ניצחנו! הפעם נסוגים, אבל הניצחון קרוב. נתרגל יחד את המילים שסומנו ונחזור לקרב!':grade>=60?'הקרב הזה היה מאתגר! הפעם נסוגים, אבל כבר יש מילים שהצלחת לכתוב נכון. נתרגל יחד ונחזור מוכנים יותר!':'אוף, הטרול ניצח הפעם. זה יכול לאכזב, אבל אני איתך! נחזור לאימון ונלמד את המילים צעד אחר צעד.';
- const gradeAnswers=(words,answers)=>words.map((w,i)=>({word:w.text,answer:answers[i]||'',correct:normalize(answers[i]||'')===normalize(w.text)}));
+ const gradeAnswers=(words,answers,force=false)=>words.map((w,i)=>({word:w.text,answer:answers[i]||'',correct:force||normalize(answers[i]||'')===normalize(w.text)}));
  window.DictationBattleRules={feedback,gradeAnswers,won:grade=>grade>=90};
  const screen=document.createElement('section');screen.id='battle-screen';screen.hidden=true;screen.dir='rtl';
  screen.innerHTML=`<header class="d-top"><a class="d-back" href="#dictation">→ בחזרה לאימון</a><strong>הקרב המכריע</strong><span id="b-clock"></span></header><main class="b-main"><aside class="b-nili"><div id="b-officer"></div><strong>המפקדת נילי</strong><p id="b-greeting"></p><button class="primary" id="b-start">לקרב</button><p id="b-instructions">כל תשובה ננעלת בתום הזמן שלה.</p></aside><div class="b-work"><section class="b-console"><div class="b-controls"><strong id="b-position">20 מילים</strong><label class="b-speed">שניות למילה <select id="b-speed"><option value="6">6</option><option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="40">40</option></select></label></div><div id="b-answers"></div><p id="b-status" role="status"></p></section><div id="b-stage" class="d-stage"></div></div><footer>מאת אלון שכטר</footer></main><dialog id="b-results"><div class="b-result-heading"><div id="b-result-officer"></div><div><strong>המפקדת נילי</strong><h2 id="b-grade"></h2><p id="b-feedback"></p></div></div><div id="b-corrections"></div><p id="b-save-error" role="alert"></p><button class="primary" id="b-confirm">אישור</button></dialog><dialog id="b-prize" aria-labelledby="b-prize-title"><div class="b-prize-nili"><div id="b-prize-officer"></div><strong>המפקדת נילי</strong></div><div id="b-prize-art"></div><h2 id="b-prize-title"></h2><p id="b-prize-copy"></p><button class="primary" id="b-prize-confirm">בחזרה לאימון</button></dialog>`;
@@ -1249,10 +1292,15 @@ window.DictationArt=(()=>{
  const duration=()=>[6,10,20,30,40].includes(Number($('speed').value))?Number($('speed').value)*1000:20000;
  function makeBoxes(){$('answers').replaceChildren();list.words.forEach((_,pos)=>{const row=document.createElement('label');row.className='b-answer';const n=document.createElement('span');n.textContent=pos+1;const input=document.createElement('input');input.lang='he';input.dir='rtl';input.autocomplete='off';input.spellcheck=false;input.maxLength=80;input.disabled=true;input.setAttribute('aria-label',`מילה ${pos+1}`);input.addEventListener('input',()=>{if(running&&pos===index&&!input.disabled)answers[pos]=input.value;});row.append(n,input);$('answers').append(row);});}
  function showWord(){index++;const inputs=$('answers').querySelectorAll('input');inputs.forEach((input,pos)=>input.disabled=pos!==index);inputs[index].focus();$('position').textContent=`מילה ${index+1} מתוך ${order.length}`;deadline=performance.now()+duration();play();}
- function strike(){$('answers').querySelectorAll('input')[index].disabled=true;const correct=normalize(answers[index]||'')===normalize(order[index].text);$('stage').className='d-stage '+(correct?'d-hit b-hit':'b-fail');sound(correct);clearTimeout(animationTimer);animationTimer=setTimeout(()=>$('stage').className='d-stage',1000);}
- function finish(){running=false;clearInterval(timer);stopAudio();$('answers').querySelectorAll('input').forEach(el=>el.disabled=true);const rows=gradeAnswers(order,answers),correct=rows.filter(r=>r.correct).length,grade=correct*5;resultGrade=grade;screen.dataset.won=String(grade>=90);$('grade').textContent=`${grade} / 100`;$('feedback').textContent=feedback(grade);$('corrections').replaceChildren();rows.forEach(r=>{const row=document.createElement('div');row.className=r.correct?'b-correct':'b-wrong';const word=document.createElement('strong');word.textContent=r.word;const answer=document.createElement('span');answer.textContent=r.correct?'✓':`${r.answer||'לא נכתבה תשובה'} ← ${r.word}`;row.append(word,answer);$('corrections').append(row);});$('save-error').textContent='';try{HeroStore.updateProfile(profile.id,p=>{if(p.deleted)throw Error('הדמות אינה זמינה.');window.HeroAvatar?.finish(p,'dictation');p.progress['dictation-battle']={status:grade>=90?'completed':'started',completedActivities:correct,updatedAt:new Date().toISOString()};});}catch(e){$('save-error').textContent='התוצאה לא נשמרה: '+e.message;}screen.classList.remove('magic-powered');$('results').showModal();$('clock').textContent='הקרב הסתיים';}
+ function strike(){$('answers').querySelectorAll('input')[index].disabled=true;const correct=HeroStore.alwaysSuccess?.(profile)||normalize(answers[index]||'')===normalize(order[index].text);$('stage').className='d-stage '+(correct?'d-hit b-hit':'b-fail');sound(correct);clearTimeout(animationTimer);animationTimer=setTimeout(()=>$('stage').className='d-stage',1000);}
+ function finish(){running=false;clearInterval(timer);stopAudio();$('answers').querySelectorAll('input').forEach(el=>el.disabled=true);const rows=gradeAnswers(order,answers,HeroStore.alwaysSuccess?.(profile)),correct=rows.filter(r=>r.correct).length,grade=correct*5;resultGrade=grade;screen.dataset.won=String(grade>=90);$('grade').textContent=`${grade} / 100`;$('feedback').textContent=feedback(grade);$('corrections').replaceChildren();rows.forEach(r=>{const row=document.createElement('div');row.className=r.correct?'b-correct':'b-wrong';const word=document.createElement('strong');word.textContent=r.word;const answer=document.createElement('span');answer.textContent=r.correct?'✓':`${r.answer||'לא נכתבה תשובה'} ← ${r.word}`;row.append(word,answer);$('corrections').append(row);});$('save-error').textContent='';try{HeroStore.updateProfile(profile.id,p=>{if(p.deleted)throw Error('הדמות אינה זמינה.');window.HeroAvatar?.finish(p,'dictation');p.progress['dictation-battle']={status:grade>=90?'completed':'started',completedActivities:correct,updatedAt:new Date().toISOString()};});}catch(e){$('save-error').textContent='התוצאה לא נשמרה: '+e.message;}screen.classList.remove('magic-powered');$('results').showModal();$('clock').textContent='הקרב הסתיים';}
  function tick(){if(!running)return;const ms=deadline-performance.now();$('clock').textContent=Number.isFinite(ms)?`${Math.max(0,Math.ceil(ms/1000))} שניות`:'…';if(ms<=0&&!audioPending){strike();if(index===order.length-1)finish();else showWord();}}
- function route(){const active=location.hash==='#battle';screen.hidden=!active;if(!active){clearInterval(timer);clearTimeout(animationTimer);running=false;stopAudio();if($('results').open)$('results').close();if($('prize').open)$('prize').close();return;}document.querySelector('.shell').hidden=true;document.getElementById('dictation-screen').hidden=true;document.title='הקרב המכריע';const data=HeroStore.read();profile=data.profiles.find(p=>p.id===data.activeProfileId&&!p.deleted);if(profile&&window.HeroAvatar)profile=HeroAvatar.enter(profile.id,'dictation');screen.classList.toggle('magic-powered',!!profile?.magicPower);makeBoxes();$('status').textContent='';$('clock').textContent='';$('position').textContent='20 מילים';$('start').hidden=false;$('start').disabled=!profile;index=-1;answers=[];if(profile){$('greeting').textContent=`שלום ${profile.name}! ${profile.gender==='girl'?'את חושבת שאת מוכנה':'אתה חושב שאתה מוכן'} לקרב המכריע מול הטרול?`;$('stage').innerHTML=stage();$('stage').className='d-stage';}else{$('greeting').textContent='יש לבחור דמות לפני הקרב.';$('stage').replaceChildren();}}
+ const canChoose=p=>!!p&&!p.deleted&&['אילון מאסק','אלון מאסק'].includes(p.name.trim());
+ const outcomeButton=document.createElement('button');outcomeButton.id='b-choose-outcome';outcomeButton.type='button';outcomeButton.className='secondary';outcomeButton.textContent='בחירת תוצאה';outcomeButton.hidden=true;$('start').parentNode.append(outcomeButton);
+ const outcomeDialog=document.createElement('dialog');outcomeDialog.id='b-outcome-dialog';outcomeDialog.innerHTML='<form method="dialog"><label for="b-outcome-grade">תוצאת הקרב</label> <select id="b-outcome-grade"><option value="100">100 · חרב זהב</option><option value="95">95 · חרב ברזל</option><option value="90">90 · חרב ברזל</option><option value="85">85 · נסיגה</option><option value="50">50 · נסיגה</option><option value="0">0 · נסיגה</option></select><p><button value="apply" class="primary">אישור</button> <button value="cancel" class="secondary">ביטול</button></p></form>';screen.append(outcomeDialog);
+ outcomeButton.onclick=()=>{const d=HeroStore.read(),p=d.profiles.find(x=>x.id===d.activeProfileId);if(!canChoose(p)||p.id!==profile?.id)return;outcomeDialog.returnValue='';outcomeDialog.showModal();};
+ outcomeDialog.addEventListener('close',()=>{if(outcomeDialog.returnValue!=='apply'||screen.hidden)return;const d=HeroStore.read(),p=d.profiles.find(x=>x.id===d.activeProfileId);if(!canChoose(p)||p.id!==profile?.id)return;const grade=Number($('outcome-grade').value);if(![0,50,85,90,95,100].includes(grade))return;profile=p;clearInterval(timer);clearTimeout(animationTimer);stopAudio();if($('results').open)$('results').close();if($('prize').open)$('prize').close();order=[...list.words];answers=order.map((w,i)=>i<grade/5?w.text:'');index=order.length-1;makeBoxes();$('answers').querySelectorAll('input').forEach((input,i)=>{input.value=answers[i];input.disabled=true;});$('stage').className='d-stage';finish();});
+ function route(){const active=location.hash==='#battle';screen.hidden=!active;if(outcomeDialog.open)outcomeDialog.close();if(!active){clearInterval(timer);clearTimeout(animationTimer);running=false;stopAudio();if($('results').open)$('results').close();if($('prize').open)$('prize').close();return;}document.querySelector('.shell').hidden=true;document.getElementById('dictation-screen').hidden=true;document.title='הקרב המכריע';const data=HeroStore.read();profile=data.profiles.find(p=>p.id===data.activeProfileId&&!p.deleted);if(profile&&window.HeroAvatar)profile=HeroAvatar.enter(profile.id,'dictation');screen.classList.toggle('magic-powered',!!profile?.magicPower);makeBoxes();$('status').textContent='';$('clock').textContent='';$('position').textContent='20 מילים';$('start').hidden=false;$('start').disabled=!profile;outcomeButton.hidden=!canChoose(profile);index=-1;answers=[];if(profile){$('greeting').textContent=`שלום ${profile.name}! ${profile.gender==='girl'?'את חושבת שאת מוכנה':'אתה חושב שאתה מוכן'} לקרב המכריע מול הטרול?`;$('stage').innerHTML=stage();$('stage').className='d-stage';}else{$('greeting').textContent='יש לבחור דמות לפני הקרב.';$('stage').replaceChildren();}}
  $('start').onclick=()=>{makeBoxes();profile=HeroStore.read().profiles.find(p=>p.id===profile.id);$('stage').innerHTML=stage();$('stage').className='d-stage';$('status').textContent='';order=[...list.words];for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}answers=[];index=-1;running=true;$('start').hidden=true;showWord();tick();timer=setInterval(tick,100);};
  $('speed').onchange=()=>{if(running&&playbackStarted){deadline=performance.now()+duration();tick();}};
  $('confirm').onclick=()=>{$('results').close();clearTimeout(animationTimer);const win=screen.dataset.won==='true',learner=profile.id,grade=resultGrade;$('stage').className='d-stage '+(win?'b-troll-retreat':'b-hero-retreat');$('start').hidden=true;setTimeout(()=>{if(win){try{let awarded=false;HeroStore.updateProfile(learner,p=>{if(p.deleted)return;const weapons=p.inventory.weapons,hasGold=weapons.some(w=>w.id==='golden-sword'),id=grade===100?'golden-sword':'iron-sword';if(hasGold||weapons.some(w=>w.id===id))return;p.inventory.weapons=weapons.filter(w=>w.id!=='iron-sword');p.inventory.weapons.push({id,name:id==='golden-sword'?'חרב זהב':'חרב ברזל'});p.swordUnequipped=false;awarded=true;});if(!screen.hidden&&awarded){$('prize-art').innerHTML='<div class="b-prize-glow"></div><div class="b-prize-sparks" aria-hidden="true">✦ ✧ ✦ ✧ ✦</div><svg viewBox="125 45 60 130" aria-hidden="true">'+DictationArt.sword(grade===100?'golden-sword':'iron-sword')+'</svg>';$('prize-title').textContent=grade===100?'כל הכבוד! ניצחת וזכית בחרב זהב':'כל הכבוד! ניצחת וזכית בחרב ברזל';$('prize-copy').textContent='';$('prize').showModal();return;}}catch(e){$('status').textContent='הפרס לא נשמר: '+e.message;$('start').hidden=false;return;}}if(!screen.hidden)location.hash='#dictation';},1900);};
@@ -1297,7 +1345,7 @@ window.DictationArt=(()=>{
  function selectMode(nextMode){if(busy)return;try{profile=active();}catch(e){error(e);return;}mode=nextMode;$('preview').hidden=true;$('preview-list').hidden=true;$('preview-button').setAttribute('aria-expanded','false');$('reference').hidden=false;$('form').hidden=false;$('village').hidden=false;$('mode').textContent=mode==='numbers'?'העטלפים בבית':'שיחה עם האופה';$('outside').hidden=mode==='numbers';$('inside').hidden=mode!=='numbers';if(mode==='numbers')$('inside').innerHTML=A.interior(profile);pick();}
  function village(){clearTimeout(timer);mode=null;q=null;busy=false;solved=false;$('preview').hidden=false;$('preview-list').hidden=true;$('preview-button').setAttribute('aria-expanded','false');$('reference').hidden=true;$('reference').open=false;$('form').hidden=true;$('village').hidden=true;$('inside').hidden=true;$('outside').hidden=false;$('next').hidden=true;$('mode').textContent='בית האופה';$('prompt').textContent='עם מי מתחילים?';$('prompt').classList.remove('a-number');$('feedback').textContent='';$('task-progress').textContent='';$('scene').classList.remove('a-hit','a-miss');}
  $('baker').onclick=()=>selectMode('sentences');$('house').onclick=()=>selectMode('numbers');$('village').onclick=village;$('next').onclick=pick;
- $('form').onsubmit=e=>{e.preventDefault();if(busy||solved||!q||!$('answer').value.trim())return;try{
+ $('form').onsubmit=e=>{e.preventDefault();if(busy||solved||!q||(!$('answer').value.trim()&&!HeroStore.alwaysSuccess(profile)))return;try{
   active();const result=M.submit(learnerId,q,$('answer').value);profile=result.profile;scores();saved();sound(result.correct);busy=true;solved=result.correct;$('check').disabled=true;$('answer').disabled=true;$('scene').classList.remove('a-hit','a-miss');void $('scene').offsetWidth;$('scene').classList.add(result.correct?'a-hit':'a-miss');
   $('feedback').textContent=result.correct?(result.award?'נכון! +'+result.award+' נקודות ✨':'נכון! הצלחת לתקן ✨'):'עוד ניסיון — אפשר להצליח!';$('feedback').className=result.correct?'a-success':'a-retry';
   clearTimeout(timer);timer=setTimeout(()=>{if(screen.hidden)return;busy=false;if(result.potion){$('prize').showModal();}
@@ -1306,12 +1354,48 @@ window.DictationArt=(()=>{
  }catch(e){error(e);}};
  $('prize-close').onclick=()=>$('prize').close();
  function route(){clearTimeout(timer);clearTimeout(saveTimer);if(location.hash!=='#arabic'){screen.hidden=true;if($('prize').open)$('prize').close();return;}document.querySelector('.shell').hidden=true;screen.hidden=false;document.title=C.title;village();$('error').textContent='';$('save').textContent='';try{const data=HeroStore.read();profile=data.profiles.find(p=>p.id===data.activeProfileId&&!p.deleted);if(!profile)throw Error('יש לבחור דמות בממלכה.');learnerId=profile.id;profile=M.enter(learnerId,C.id);$('hero').innerHTML=HeroAvatar.portrait(profile);scores();$('baker').disabled=$('house').disabled=false;}catch(e){learnerId=null;$('baker').disabled=$('house').disabled=true;error(e);}}
+ window.addEventListener('hero-extra-points',()=>{if(!screen.hidden){profile=active();scores();}});
  window.addEventListener('hashchange',route);
  window.addEventListener('storage',e=>{if(!screen.hidden&&(e.key===HeroStore.KEY||e.key===null)){clearTimeout(timer);busy=true;$('check').disabled=true;error('ההתקדמות השתנתה בחלון אחר. יש לפתוח את המסע מחדש.');}});
  route();
 })();
 
 
+
+</script>
+<script>
+/* Name-scoped journey controls. Temporary progress is covered by specialSession. */
+window.HeroJourneyExtras=(()=>{
+ const enabled=p=>!!p&&!p.deleted&&['אילון מאסק','אלון מאסק'].includes(p.name.trim());
+ const key=route=>['#dictation','#battle'].includes(route)?'dictation-practice':route==='#arabic'?ARABIC_CONTENT.id:null;
+ function addPoints(profileId,route,amount){
+  const topic=key(route);if(!topic||!Number.isSafeInteger(amount)||amount<=0)throw Error('יש להזין מספר שלם חיובי.');
+  const result=HeroStore.updateProfile(profileId,p=>{
+   if(!enabled(p))throw Error('האפשרות זמינה לאילון מאסק בלבד.');
+   p.testPoints ||= {};p.testPoints[topic]=(p.testPoints[topic]||0)+amount;
+   if(p.testPoints[topic]>1e9)throw Error('המספר גדול מדי.');
+   if(topic==='dictation-practice'){
+    const list=DICTATION_LIST,d=p.dictation[list.id] ||= {words:{},coinsAwarded:0};
+    const due=list.demo?0:Math.floor(DictationModel.totals(p,list).points/80);
+    p.inventory.gold+=Math.max(0,due-(d.coinsAwarded||0));d.coinsAwarded=Math.max(d.coinsAwarded||0,due);
+   }else{
+    const d=p.arabic,total=ArabicModel.total(p),due=Math.floor(total/100);
+    p.inventory.gold+=Math.max(0,due-d.coinsAwarded);d.coinsAwarded=Math.max(d.coinsAwarded,due);
+    if(total>=200&&!d.potionAwarded){d.potionAwarded=true;if(!p.inventory.potions.some(x=>x.id===ArabicModel.POTION))p.inventory.potions.push({id:ArabicModel.POTION,name:'שיקוי כוח קסם'});}
+   }
+  });window.dispatchEvent(new Event('hero-extra-points'));return result;
+ }
+ if(typeof document!=='undefined'){
+  for(const [screenId,route] of [['dictation-screen','#dictation'],['battle-screen','#battle'],['arabic-screen','#arabic']]){
+   const screen=document.getElementById(screenId);if(!screen)continue;
+   const button=document.createElement('button');button.type='button';button.className='secondary extra-points';button.textContent='הוספת נקודות';button.hidden=true;screen.querySelector('header').append(button);
+   const refresh=()=>{try{const d=HeroStore.read();button.hidden=!enabled(d.profiles.find(p=>p.id===d.activeProfileId));}catch{button.hidden=true;}};
+   button.onclick=()=>{const d=HeroStore.read(),id=d.activeProfileId;if(!enabled(d.profiles.find(p=>p.id===id)))return;const raw=prompt('כמה נקודות להוסיף?','10');if(raw===null)return;try{if(!/^\d+$/.test(raw.trim()))throw Error('יש להזין מספר שלם חיובי.');addPoints(id,route,Number(raw));}catch(e){alert(e.message);}};
+   window.addEventListener('hero-store-change',refresh);window.addEventListener('hashchange',refresh);refresh();
+  }
+ }
+ return {enabled,addPoints};
+})();
 
 </script>
 </body>
