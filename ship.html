@@ -294,8 +294,28 @@ window.HeroStore = (() => {
       id(key);if(!object(value)||!['started','completed'].includes(value.status))fail();
       progress[key]={status:value.status,completedActivities:number(value.completedActivities),updatedAt:date(value.updatedAt)};
     }
-    return {id:id(p.id),name:text(p.name,24),gender:p.gender,avatar:{type:p.avatar.type,color:p.avatar.color},
-      inventory:{gold:number(p.inventory.gold),weapons:items(p.inventory.weapons),potions:items(p.inventory.potions),artifacts:items(p.inventory.artifacts),pets:items(p.inventory.pets)},
+    const arabic={records:{},rounds:{},coinsAwarded:0,potionAwarded:false,sequence:0};
+    if(p.arabic!==undefined){
+      const a=p.arabic;if(!object(a)||!object(a.records)||!object(a.rounds)||Object.keys(a.records).length>200)fail();
+      for(const [key,r] of Object.entries(a.records)){if(!/^(sentences_(class|mother|father|home)|numbers_n([1-9]|[1-9][0-9]))$/.test(key)||!object(r))fail();const attempts=number(r.attempts),correct=number(r.correct),rewarded=number(r.rewarded);if(correct>attempts||rewarded>correct)fail();arabic.records[key]={attempts,correct,rewarded};}
+      arabic.sequence=number(a.sequence);arabic.coinsAwarded=number(a.coinsAwarded);if(typeof a.potionAwarded!=='boolean')fail();arabic.potionAwarded=a.potionAwarded;
+      for(const [mode,r] of Object.entries(a.rounds)){
+        if(!['sentences','numbers'].includes(mode)||!object(r)||!Array.isArray(r.remaining)||r.remaining.length>109||typeof r.missed!=='boolean'||typeof r.name!=='string'||r.name.length>40)fail();
+        const valid=x=>{if(typeof x!=='string'||!(mode==='sentences'?/^(class|mother|father|home)$/:/^n([1-9]|[1-9][0-9])$/).test(x))fail();return x;};
+        const remaining=r.remaining.map(valid),current=r.current===null?null:valid(r.current),last=r.last===null?null:valid(r.last),token=number(r.token);
+        const counts={};for(const x of [...remaining,...(current?[current]:[])]){counts[x]=(counts[x]||0)+1;const limit=mode==='numbers'&&+x.slice(1)>=11&&+x.slice(1)<=20?2:1;if(counts[x]>limit)fail();}
+        if((!current&&r.missed)||token>arabic.sequence)fail();
+        arabic.rounds[mode]={remaining,current,last,missed:r.missed,name:r.name,token};
+      }
+    }
+    let magicPower=null;
+    if(p.magicPower!=null){if(!object(p.magicPower))fail();magicPower={journey:p.magicPower.journey===null?null:id(p.magicPower.journey),targetPoints:number(p.magicPower.targetPoints??0)};}
+    const equippedPet=p.equippedPet==null?null:id(p.equippedPet);if(equippedPet&&!p.inventory.pets.some(x=>x.id===equippedPet))fail();
+    const testPoints={};if(p.testPoints!==undefined){if(!object(p.testPoints)||Object.keys(p.testPoints).length>100)fail();for(const [key,value] of Object.entries(p.testPoints))testPoints[id(key)]=number(value);}
+    if(p.millionGranted!==undefined&&typeof p.millionGranted!=='boolean')fail();
+    const grantMillion=APP==='curiosity-kingdom'&&p.name.trim()==='אילון מאסק'&&!p.millionGranted;
+    return {millionGranted:p.millionGranted===true||grantMillion,testPoints,equippedPet,arabic,magicPower,id:id(p.id),name:text(p.name,24),gender:p.gender,avatar:{type:p.avatar.type,color:p.avatar.color},
+      inventory:{gold:grantMillion?1000000:number(p.inventory.gold),weapons:items(p.inventory.weapons),potions:items(p.inventory.potions),artifacts:items(p.inventory.artifacts),pets:items(p.inventory.pets)},
       swordUnequipped:p.swordUnequipped===true,deleted: p.deleted === true,progress,createdAt:date(p.createdAt),updatedAt:date(p.updatedAt)};
   }
   function validate(data){
@@ -345,6 +365,7 @@ window.HeroStore = (() => {
   return {trash,restore,emptyTrash,KEY,APP,MAX_BYTES,empty,read,validate,createProfile,updateProfile,select,parseBackup,mergeBackup,
     exportBackup:()=>JSON.stringify({...read(),exportedAt:new Date().toISOString()},null,2)};
 })();
+
 
 </script>
 <script>
