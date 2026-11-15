@@ -761,7 +761,8 @@ window.ArabicModel=(()=>{
     accepted.push((father?'שם אבא שלי ':'שם אמא שלי ')+name,(father?'לאבא שלי קוראים ':'לאמא שלי קוראים ')+name,(father?'שמו של אבי ':'שמה של אמי ')+name);
     accepted.push((father?'שם אבי ':'שם אמי ')+name,(father?'השם של אבא שלי ':'השם של אמא שלי ')+name,(father?'השם של אבא שלי הוא ':'השם של אמא שלי הוא ')+name);
    }
-   correct=accepted.some(text=>normalize(answer)===normalize(text));
+   const normalizeAnswer=text=>q.mode==='numbers'?normalize(text).replace(/[׳’]/g,"'").replace(/ח'מס/g,'חמס').replace(/תלאת'ה/g,'תלאתה').replace(/תלאת'ין/g,'תלאתין').replace(/תלא?ת'עש/g,'תלתעש'):normalize(text);
+   correct=accepted.some(text=>normalizeAnswer(answer)===normalizeAnswer(text));
    const record=d.records[q.mode+'_'+q.id] ||= {attempts:0,correct:0,rewarded:0};record.attempts++;
    if(correct){record.correct++;if(!r.name.startsWith('HELP:')){award=q.mode==='numbers'?2:record.rewarded<3?10:1;record.rewarded++;}r.last=r.current;r.current=null;r.missed=false;}
    else r.missed=true;
